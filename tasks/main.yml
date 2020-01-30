@@ -27,7 +27,6 @@
   ec2:
     region: "{{ aws_region }}"
     key_name: "{{ vpc_key }}"
-    state: "{{ ec2_state }}"
     instance_type: "{{ ec2_instance_type }}"
     assign_public_ip: "{{ ec2_assign_public_ip }}"
     image: "{{ ec2_image }}"
