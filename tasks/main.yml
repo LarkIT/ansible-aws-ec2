@@ -1,7 +1,6 @@
 # roles/aws-ec2/tasks/main.yml
-
 # Create EC2 instance and depenencies
-
+---
 - name: Lookup EC2 subnet info
   ec2_vpc_subnet_info:
     filters:
