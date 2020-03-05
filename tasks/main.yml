@@ -9,7 +9,6 @@
 
 - name: Create security group for EC2 instance 
   ec2_group:
-    state: "{{ ec2_state }}"
     name: "{{ ec2_name }}-sg"
     description: "Security group for {{ ec2_name }}"
     region: "{{ aws_region }}"
