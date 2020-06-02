@@ -43,3 +43,16 @@
       Name: "{{ ec2_name }}"
     instance_tags:
       Name: "{{ ec2_name }}"
+
+- block:
+    - name: Lookup EC2 info
+      ec2_instance_info:
+        filters:
+          "tag:Name": "{{ ec2_name }}"
+      register: ec2_info
+    - name: Allocate and associate EIP
+      ec2_eip:
+        in_vpc: yes
+        region: "{{ aws_region }}"
+        device_id: "{{ ec2_info|json_query('instances[0].instance_id') }}"
+  when: ec2_allocate_eip
