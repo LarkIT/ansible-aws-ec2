@@ -62,9 +62,9 @@
 
 - block:
     - name: Lookup EIP info
-       ec2_eip_info:
-       filters:
-         "tag:Name": "{{ ec2_name }}-eip"
+      ec2_eip_info:
+        filters:
+          "tag:Name": "{{ ec2_name }}-eip"
       register: eip_info
     - name: Create or update Route 53 record 
       route53:
