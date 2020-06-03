@@ -68,7 +68,7 @@
     - debug:
         var: ec2_info
     - debug: 
-        var: "{{ ec2_info|json_query('instances[0].instance_id') }}"
+        var: ec2_info|json_query('instances[0].instance_id')
     
     # - name: Lookup EIP info
     #   ec2_eip_info:
