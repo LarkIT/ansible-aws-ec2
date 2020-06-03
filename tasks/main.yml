@@ -62,8 +62,8 @@
 - block:
     - name: Lookup EC2 info
       ec2_instance_info:
-      filters:
-        "tag:Name": "{{ ec2_name }}"
+        filters:
+          "tag:Name": "{{ ec2_name }}"
       register: ec2_info
     - debug:
         var: ec2_info
