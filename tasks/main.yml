@@ -15,7 +15,7 @@
     region: "{{ aws_region }}"
     vpc_id: "{{ vpc_id }}"
     purge_rules: False
-    rules: "{{ ec2_sg_ingress_rules | default(omit) }}"
+    rules: "{{ ec2_sg_ingress_rules }}"
     rules_egress:
       - proto: all
         from_port: 0
