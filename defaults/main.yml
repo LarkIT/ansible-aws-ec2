@@ -8,4 +8,5 @@ ec2_exact_count: 1
 ec2_assign_public_ip: false
 ec2_state: present
 ec2_allocate_eip: false
-ec2_configure_dns: false
+ec2_configure_eip_dns: false
+ec2_eip_dns_overwrite: true
