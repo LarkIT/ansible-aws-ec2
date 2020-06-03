@@ -83,7 +83,7 @@
     #     zone: "{{ ec2_eip_dns_zone }}"
     #     record: "{{ ec2_eip_dns_name }}"
     #     type: A
-    #     value: "{{  }}"
+    #     value: "{{ ec2_info|json_query('instances[0].public_ip_address') }}"
     #     ttl: 3600
     #     overwrite: "{{ ec2_eip_dns_overwrite }}"
     #     wait: true
