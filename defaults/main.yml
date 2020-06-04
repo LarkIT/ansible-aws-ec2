@@ -5,9 +5,11 @@ ec2_image: ami-01ed306a12b7d1c96
 ec2_root_volume_size: 16
 ec2_root_volume_delete_on_termination: true
 ec2_exact_count: 1
+ec2_sg_purge_ingres_rules: false
 ec2_assign_public_ip: false
 ec2_state: present
 ec2_allocate_eip: false
 ec2_configure_eip_dns: false
-ec2_eip_dns_overwrite: true
+ec2_cpnfigure_private_ip_dns: false
+ec2_eip_dns_overwrite: false
 ec2_sg_ingress_rules: []
