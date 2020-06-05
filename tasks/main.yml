@@ -52,7 +52,7 @@
   register: ebs_info
 
 - debug:
-    var: ec2_info|json_query('instances[0].block_device_mapping./dev/sda1.volume_id
+    var: ec2_info|json_query('instances[0].block_device_mapping./dev/sda1.volume_id')
 
 # - name: Tag EC2 instance root EBS volume
 #   ec2_tag:
