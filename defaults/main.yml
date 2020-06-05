@@ -9,7 +9,7 @@ ec2_sg_purge_ingress_rules: false
 ec2_assign_public_ip: false
 ec2_state: present
 ec2_allocate_eip: false
-ec2_cpnfigure_private_ip_dns: false
+ec2_configure_private_ip_dns: false
 ec2_private_ip_dns_overwrite: false
 ec2_configure_eip_dns: false
 ec2_eip_dns_overwrite: false
