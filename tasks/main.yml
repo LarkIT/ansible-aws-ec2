@@ -67,11 +67,12 @@
 
 - name: Add EC2 instance private IP to internal DNS
   route53:
+    private_zone: true
     state: present
     zone: "{{ ec2_private_ip_dns_zone }}"
     record: "{{ ec2_name }}.{{ ec2_private_ip_dns_zone }}"
     type: A
-    value: "{{ ec2_info|json_query('instances[0].private_ip_address') }}"
+    value: "{{ ec2_info|json_query('instances[0].private_ip') }}"
     ttl: 3600
     overwrite: "{{ ec2_private_ip_dns_overwrite }}"
     wait: true
