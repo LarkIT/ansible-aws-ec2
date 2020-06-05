@@ -49,14 +49,13 @@
   ec2_instance_info:
     filters:
       "tag:Name": "{{ ec2_name }}"
-  register: ebs_info
+  register: ec2_info_volume
 
 - name: List volumes attached to EC2 instance
   ec2_vol:
-    instance: "{{ ec2_info|json_query('instances[0].instance_id') }}"
+    instance: "{{ ec2_info_volume|json_query('instances[0].instance_id') }}"
     state: list
   register: volume_info
-
 
 - debug:
     var: volume_info
