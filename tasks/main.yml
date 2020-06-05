@@ -45,15 +45,15 @@
     instance_tags:
       Name: "{{ ec2_name }}"
 
-- name: Lookup EC2 id for volume list
+- name: Lookup EC2 info
   ec2_instance_info:
     filters:
       "tag:Name": "{{ ec2_name }}"
-  register: ec2_info_volume
+  register: ec2_info
 
 - name: List volumes attached to EC2 instance
   ec2_vol:
-    instance: "{{ ec2_info_volume|json_query('instances[0].instance_id') }}"
+    instance: "{{ ec2_info|json_query('instances[0].instance_id') }}"
     state: list
   register: volume_info
 
@@ -65,37 +65,35 @@
     tags:
       Name: "{{ ec2_name }}-root"
 
+- name: Add EC2 instance private IP to internal DNS
+  route53:
+    state: present
+    zone: "{{ ec2_private_ip_dns_zone }}"
+    record: "{{ ec2_name }}.{{ ec2_private_ip_dns_zone }}"
+    type: A
+    value: "{{ ec2_info|json_query('instances[0].private_ip_address') }}"
+    ttl: 3600
+    overwrite: "{{ ec2_private_ip_dns_overwrite }}"
+    wait: true
+  when: ec2_configure_private_ip_dns
 
-- block:
-    - name: Lookup EC2 info
-      ec2_instance_info:
-        filters:
-          "tag:Name": "{{ ec2_name }}"
-      register: ec2_info
-    - name: Allocate and associate EIP
-      ec2_eip:
-        in_vpc: yes
-        region: "{{ aws_region }}"
-        device_id: "{{ ec2_info|json_query('instances[0].instance_id') }}"
-        tag_name: Name
-        tag_value: "{{ ec2_name }}-eip"
+- name: Allocate and associate EIP
+  ec2_eip:
+    in_vpc: yes
+    region: "{{ aws_region }}"
+    device_id: "{{ ec2_info|json_query('instances[0].instance_id') }}"
+    tag_name: Name
+    tag_value: "{{ ec2_name }}-eip"
   when: ec2_allocate_eip
 
-- block:
-    - name: Lookup EC2 info
-      ec2_instance_info:
-        filters:
-          "tag:Name": "{{ ec2_name }}"
-      register: ec2_info
-   
-    - name: Create or update Route 53 record 
-      route53:
-        state: present
-        zone: "{{ ec2_eip_dns_zone }}"
-        record: "{{ ec2_eip_dns_name }}"
-        type: A
-        value: "{{ ec2_info|json_query('instances[0].public_ip_address') }}"
-        ttl: 3600
-        overwrite: "{{ ec2_eip_dns_overwrite }}"
-        wait: true
+- name: Create or update Route 53 record 
+  route53:
+    state: present
+    zone: "{{ ec2_eip_dns_zone }}"
+    record: "{{ ec2_eip_dns_name }}"
+    type: A
+    value: "{{ ec2_info|json_query('instances[0].public_ip_address') }}"
+    ttl: 3600
+    overwrite: "{{ ec2_eip_dns_overwrite }}"
+    wait: true
   when: ec2_configure_eip_dns
