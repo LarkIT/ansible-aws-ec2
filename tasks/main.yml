@@ -72,7 +72,7 @@
     zone: "{{ ec2_private_ip_dns_zone }}"
     record: "{{ ec2_name }}.{{ ec2_private_ip_dns_zone }}"
     type: A
-    value: "{{ ec2_info|json_query('instances[0].private_ip') }}"
+    value: "{{ ec2_info|json_query('instances[0].private_ip_address') }}"
     ttl: 3600
     overwrite: "{{ ec2_private_ip_dns_overwrite }}"
     wait: true
