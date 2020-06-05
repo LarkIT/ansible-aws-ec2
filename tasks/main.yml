@@ -45,6 +45,25 @@
     instance_tags:
       Name: "{{ ec2_name }}"
 
+- name: Lookup EC2 root volume
+  - name: Lookup EC2 info
+      ec2_instance_info:
+        filters:
+          "tag:Name": "{{ ec2_name }}"
+      register: ebs_info
+
+- debug:
+    var: ec2_info|json_query('instances[0].block_device_mapping./dev/sda1.volume_id
+
+# - name: Tag EC2 instance root EBS volume
+#   ec2_tag:
+#     region: "{{ aws_region }}"
+#     resource: "{{ ec2_info|json_query('instances[0].block_device_mapping./dev/sda1.volume_id') }}"
+#     state: present
+#     tags:
+#       Name: "{{ ec2_name }}-root"
+
+
 - block:
     - name: Lookup EC2 info
       ec2_instance_info:
