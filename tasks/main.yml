@@ -45,7 +45,7 @@
     instance_tags:
       Name: "{{ ec2_name }}"
 
-- name: Lookup EC2 root volume
+- name: Lookup EC2 id for volume list
   ec2_instance_info:
     filters:
       "tag:Name": "{{ ec2_name }}"
@@ -58,7 +58,7 @@
   register: volume_info
 
 - debug:
-    var: volume_info
+    var: volume_info|json_query('volumes[0].id')
 
 # - name: Tag EC2 instance root EBS volume
 #   ec2_tag:
