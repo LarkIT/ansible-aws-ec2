@@ -2,8 +2,8 @@
 # Role default parameters
 ---
 aws_region: us-west-2
-vpc_id: my-vpc-id
-vpc_key: my-vpc-key
+aws_vpc_id: my-vpc-id
+aws_vpc_key: my-vpc-key
 ec2_name: my-ec2
 ec2_instance_type: m4.large
 ec2_subnet_name: my-subnet
