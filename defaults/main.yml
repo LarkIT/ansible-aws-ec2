@@ -1,10 +1,6 @@
 # defaults/main.yml
 # Role default parameters
 ---
-aws_region: us-west-2
-aws_vpc_id: my-vpc-id
-aws_vpc_key: my-vpc-key
-ec2_name: my-ec2
 ec2_instance_type: m4.large
 ec2_subnet_name: my-subnet
 ec2_image: ami-0bc06212a56393ee1 # Latest Cento OS 7 as of 2020-07-22
@@ -16,8 +12,13 @@ ec2_allocate_eip: false
 ec2_configure_private_ip_dns: false
 ec2_private_ip_dns_zone: example.lan
 ec2_private_ip_dns_overwrite: false
-ec2_configure_eip_dns: false
-ec2_eip_dns_overwrite: false
+ec2_configure_public_dns: false
+ec2_public_dns_zone: example.com
+ec2_public_dns_name: app.example.com
+ec2_configure_mgmt_dns: false
+ec2_mgmt_dns_zone: aws.example.com
+ec2_mgmt_dns_name: example-prodapp-01.aws.example.com
+ec2_mgmt_dns_overwrite: false
 ec2_sg_ingress_rules: []
 ec2_sg_egress_rules:
   - proto: all
@@ -29,5 +30,3 @@ ec2_volumes:
     volume_size: 16
     delete_on_termination: true
     encrypted: True
-ec2_eip_dns_zone: example.com
-ec2_eip_dns_name: app.example.com

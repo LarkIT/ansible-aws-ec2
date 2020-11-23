@@ -96,14 +96,26 @@
     tag_value: "{{ ec2_name }}-eip"
   when: ec2_allocate_eip
 
-- name: Create or update Route 53 record 
+- name: Create or update public DNS record
   route53:
     state: present
-    zone: "{{ ec2_eip_dns_zone }}"
-    record: "{{ ec2_eip_dns_name }}"
+    zone: "{{ ec2_public_dns_zone }}"
+    record: "{{ ec2_public_dns_name }}"
     type: A
     value: "{{ ec2_info|json_query('instances[0].public_ip_address') }}"
     ttl: 3600
-    overwrite: "{{ ec2_eip_dns_overwrite }}"
+    overwrite: "{{ ec2_public_dns_overwrite }}"
     wait: true
-  when: ec2_configure_eip_dns
+  when: ec2_configure_public_dns
+
+- name: Create or update mgmt dns record
+  route53:
+    state: present
+    zone: "{{ ec2_mgmt_dns_zone }}"
+    record: "{{ ec2_mgmt_dns_name }}"
+    type: A
+    value: "{{ ec2_info|json_query('instances[0].public_ip_address') }}"
+    ttl: 3600
+    overwrite: "{{ ec2_mgmt_dns_overwrite }}"
+    wait: true
+  when: ec2_mgmt_public_dns
