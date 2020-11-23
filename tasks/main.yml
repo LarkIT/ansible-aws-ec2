@@ -37,7 +37,7 @@
       Name: "{{ ec2_name }}"
     instance_tags:
       Name: "{{ ec2_name }}"
-      AnsibleManaged:
+      AnsibleManaged: "True"
 
 - name: Lookup EC2 info
   ec2_instance_info:
