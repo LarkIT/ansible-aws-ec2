@@ -3,6 +3,7 @@
 ---
 - name: Lookup EC2 subnet info
   ec2_vpc_subnet_info:
+    region: "{{ aws_region }}"
     filters:
       "tag:Name": "{{ ec2_subnet_name }}"
   register: subnet_info
