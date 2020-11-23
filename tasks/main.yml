@@ -56,6 +56,9 @@
 - debug:
     var: ec2_info
 
+- debug: 
+    var: ec2_info|json_query('instances[0].instance_id')
+
 - debug:
     var: volume_info
 
