@@ -46,18 +46,18 @@
       "tag:Name": "{{ ec2_name }}"
   register: ec2_info
 
+- debug:
+    var: ec2_info
+
+- debug: 
+    var: ec2_info|json_query('instances[0].instance_id')
+
 - name: List volumes attached to EC2 instance
   ec2_vol:
     region: "{{ aws_region }}"
     instance: "{{ ec2_info|json_query('instances[0].instance_id') }}"
     state: list
   register: volume_info
-
-- debug:
-    var: ec2_info
-
-- debug: 
-    var: ec2_info|json_query('instances[0].instance_id')
 
 - debug:
     var: volume_info
