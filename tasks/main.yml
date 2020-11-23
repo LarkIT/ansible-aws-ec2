@@ -54,6 +54,9 @@
   register: volume_info
 
 - debug:
+    var: ec2_info
+
+- debug:
     var: volume_info
 
 - debug:
