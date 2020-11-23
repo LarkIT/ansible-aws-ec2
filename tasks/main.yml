@@ -53,6 +53,13 @@
     state: list
   register: volume_info
 
+- debug:
+    var: volume_info
+
+- debug:
+    var: volume_info|json_query('volumes[0].id')
+  
+
 - name: Tag EC2 instance root EBS volume
   ec2_tag:
     region: "{{ aws_region }}"
