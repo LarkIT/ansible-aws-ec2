@@ -39,8 +39,8 @@
       Name: "{{ ec2_name }}"
 
 - name: Lookup EC2 info
-  region: "{{ aws_region }}"
   ec2_instance_info:
+    region: "{{ aws_region }}"
     filters:
       "tag:Name": "{{ ec2_name }}"
   register: ec2_info
