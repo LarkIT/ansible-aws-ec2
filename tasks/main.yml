@@ -120,4 +120,4 @@
     ttl: 3600
     overwrite: "{{ ec2_mgmt_dns_overwrite }}"
     wait: true
-  when: ec2_mgmt_public_dns
+  when: ec2_configure_mgmt_dns
