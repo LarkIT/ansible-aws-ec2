@@ -20,6 +20,7 @@
     rules_egress: "{{ ec2_sg_egress_rules }}"
     tags: 
       Name : "{{ ec2_name }}-sg"
+      Environment: "{{ aws_resource_environment }}"
 
 - name: Create EC2 instance
   ec2:
@@ -38,6 +39,7 @@
     instance_tags:
       Name: "{{ ec2_name }}"
       AnsibleManaged: "True"
+      Environment: "{{ aws_resource_environment }}"
 
 - name: Lookup EC2 info
   ec2_instance_info:
