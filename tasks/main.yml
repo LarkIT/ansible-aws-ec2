@@ -36,10 +36,7 @@
     volumes: "{{ ec2_volumes }}"
     count_tag:
       Name: "{{ ec2_name }}"
-    instance_tags:
-      Name: "{{ ec2_name }}"
-      AnsibleManaged: "True"
-      Environment: "{{ aws_resource_environment }}"
+    instance_tags: "{{ ec2_instance_tags }}"
 
 - name: Lookup EC2 info
   ec2_instance_facts:
