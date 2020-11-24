@@ -94,8 +94,6 @@
     in_vpc: yes
     region: "{{ aws_region }}"
     device_id: "{{ ec2_info|json_query('instances[0].instance_id') }}"
-    tag_name: Name
-    tag_value: "{{ ec2_name }}-eip"
   when: ec2_allocate_eip
 
 - name: Create or update public DNS record
