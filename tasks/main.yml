@@ -2,7 +2,7 @@
 # Create EC2 instance and depenencies
 ---
 - name: Lookup EC2 subnet info
-  ec2_vpc_subnet_info:
+  ec2_vpc_subnet_facts:
     region: "{{ aws_region }}"
     filters:
       "tag:Name": "{{ ec2_subnet_name }}"
@@ -42,7 +42,7 @@
       Environment: "{{ aws_resource_environment }}"
 
 - name: Lookup EC2 info
-  ec2_instance_info:
+  ec2_instance_facts:
     region: "{{ aws_region }}"
     filters:
       "tag:Name": "{{ ec2_name }}"
