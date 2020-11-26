@@ -30,7 +30,7 @@
     assign_public_ip: "{{ ec2_assign_public_ip }}"
     image: "{{ ec2_image }}"
     wait: yes
-    group: "{{ ec2_name }}-sg"
+    group: "{{ ec2_security_groups }}"
     exact_count: "{{ ec2_exact_count }}"
     vpc_subnet_id: "{{ subnet_info|json_query('subnets[0].subnet_id') }}"
     volumes: "{{ ec2_volumes }}"
