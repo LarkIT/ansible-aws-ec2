@@ -82,7 +82,7 @@
   register: eip_allocation
 
 - debug:
-    var: eip_allocation
+    var: eip_allocation.public_ip
 
 - name: Create or update public DNS record
   route53:
