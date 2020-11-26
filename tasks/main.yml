@@ -79,6 +79,10 @@
     region: "{{ aws_region }}"
     device_id: "{{ ec2_info|json_query('instances[0].instance_id') }}"
   when: ec2_allocate_eip
+  register: eip_allocation
+
+- debug:
+    var: eip_allocation
 
 - name: Create or update public DNS record
   route53:
