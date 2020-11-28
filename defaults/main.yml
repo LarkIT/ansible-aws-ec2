@@ -9,9 +9,9 @@ ec2_sg_purge_ingress_rules: false
 ec2_assign_public_ip: false
 ec2_state: present
 ec2_allocate_eip: false
-ec2_configure_private_ip_dns: false
-ec2_private_ip_dns_zone: example.lan
-ec2_private_ip_dns_overwrite: false
+ec2_configure_private_dns: false
+ec2_private_dns_zone: example.lan
+ec2_private_dns_overwrite: false
 ec2_configure_public_dns: false
 ec2_public_dns_zone: example.com
 ec2_public_dns_name: app.example.com
