@@ -60,7 +60,7 @@
     tags:
       Name: "{{ ec2_name }}-root"
 
-- name: Add EC2 instance private IP to internal DNS
+- name: Create or update private DNS record
   route53:
     private_zone: true
     state: present
